@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 const CreateProfile = props => {
+  const [toggleSocials, setToggleSocials] = useState(false);
+
   const [formData, setFormData] = useState({
-    company: "",
+    company: "asd",
     website: "",
     location: "",
     status: "",
@@ -28,10 +30,14 @@ const CreateProfile = props => {
     bio,
     twitter,
     facebook,
-    linked,
+    linkedin,
     youtube,
-    instagra
+    instagram
   } = formData;
+
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   return (
     <Fragment>
       <h1 className="large text-primary">Create Your Profile</h1>
@@ -42,7 +48,7 @@ const CreateProfile = props => {
       <small>* = require fields</small>
       <form className="form">
         <div className="form-group">
-          <select name="status">
+          <select name="status" value={status} onChange={e => onChange(e)}>
             <option value="0">* Select Professional Status</option>
             <option value="Developer">Developer</option>
             <option value="Junior Developer">Junior Developer</option>
@@ -58,25 +64,49 @@ const CreateProfile = props => {
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Company" name="company" />
+          <input
+            type="text"
+            placeholder="Company"
+            name="company"
+            onChange={e => onChange(e)}
+            value={company}
+          />
           <small className="form-text">
             Could be your own company or one you work for
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Website" name="website" />
+          <input
+            type="text"
+            placeholder="Website"
+            name="website"
+            onChange={e => onChange(e)}
+            value={website}
+          />
           <small className="form-text">
             Could be your own or a company website
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Location" name="location" />
+          <input
+            type="text"
+            placeholder="Location"
+            name="location"
+            onChange={e => onChange(e)}
+            value={location}
+          />
           <small className="form-text">
             City & state suggested (eg. Boston, MA)
           </small>
         </div>
         <div className="form-group">
-          <input type="text" placeholder="* Skills" name="skills" />
+          <input
+            type="text"
+            placeholder="* Skills"
+            name="skills"
+            onChange={e => onChange(e)}
+            value={skills}
+          />
           <small className="form-text">
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
           </small>
@@ -86,6 +116,8 @@ const CreateProfile = props => {
             type="text"
             placeholder="Github Username"
             name="githubusername"
+            onChange={e => onChange(e)}
+            value={githubusername}
           />
           <small className="form-text">
             If you want your latest repos and a Github link, include your
@@ -93,41 +125,79 @@ const CreateProfile = props => {
           </small>
         </div>
         <div className="form-group">
-          <textarea placeholder="A short bio of yourself" name="bio"></textarea>
+          <textarea
+            placeholder="A short bio of yourself"
+            name="bio"
+            onChange={e => onChange(e)}
+            value={bio}
+          ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
 
         <div className="my-2">
-          <button type="button" className="btn btn-light">
+          <button
+            onClick={() => setToggleSocials(!toggleSocials)}
+            type="button"
+            className="btn btn-light"
+          >
             Add Social Network Links
           </button>
           <span>Optional</span>
         </div>
 
-        <div className="form-group social-input">
-          <i className="fa fa-twitter fa-2x"></i>
-          <input type="text" placeholder="Twitter URL" name="twitter" />
-        </div>
+        {toggleSocials && (
+          <Fragment>
+            <div className="form-group social-input">
+              <i className="fa fa-twitter fa-2x"></i>
+              <input
+                type="text"
+                placeholder="Twitter URL"
+                name="twitter"
+                value={twitter}
+              />
+            </div>
 
-        <div className="form-group social-input">
-          <i className="fa fa-facebook fa-2x"></i>
-          <input type="text" placeholder="Facebook URL" name="facebook" />
-        </div>
+            <div className="form-group social-input">
+              <i className="fa fa-facebook fa-2x"></i>
+              <input
+                type="text"
+                placeholder="Facebook URL"
+                name="facebook"
+                value={facebook}
+              />
+            </div>
 
-        <div className="form-group social-input">
-          <i className="fa fa-youtube fa-2x"></i>
-          <input type="text" placeholder="YouTube URL" name="youtube" />
-        </div>
+            <div className="form-group social-input">
+              <i className="fa fa-youtube fa-2x"></i>
+              <input
+                type="text"
+                placeholder="YouTube URL"
+                name="youtube"
+                value={youtube}
+              />
+            </div>
 
-        <div className="form-group social-input">
-          <i className="fa fa-linkedin fa-2x"></i>
-          <input type="text" placeholder="Linkedin URL" name="linkedin" />
-        </div>
+            <div className="form-group social-input">
+              <i className="fa fa-linkedin fa-2x"></i>
+              <input
+                type="text"
+                placeholder="Linkedin URL"
+                name="linkedin"
+                value={linkedin}
+              />
+            </div>
 
-        <div className="form-group social-input">
-          <i className="fa fa-instagram fa-2x"></i>
-          <input type="text" placeholder="Instagram URL" name="instagram" />
-        </div>
+            <div className="form-group social-input">
+              <i className="fa fa-instagram fa-2x"></i>
+              <input
+                type="text"
+                placeholder="Instagram URL"
+                name="instagram"
+                value={instagram}
+              />
+            </div>
+          </Fragment>
+        )}
         <input type="submit" className="btn btn-primary my-1" />
         <a className="btn btn-light my-1" href="dashboard.html">
           Go Back
