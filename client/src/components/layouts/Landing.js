@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
-    return <Redirect to="dashboard" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -18,10 +18,10 @@ const Landing = ({ isAuthenticated }) => {
             other developers
           </p>
           <div className="buttons">
-            <Link to="register" className="btn btn-primary">
+            <Link to="/register" className="btn btn-primary">
               Sign up
             </Link>
-            <Link to="login" className="btn">
+            <Link to="/login" className="btn">
               Login
             </Link>
           </div>
