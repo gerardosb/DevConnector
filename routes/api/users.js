@@ -71,15 +71,15 @@ router.post(
         }
       };
 
-      jwt.sign(
-        payload,
-        config.get("jwtSecret"),
-        { expiresIn: 360000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      const jwt_secret =
+        process.env.NODE_ENV === "production"
+          ? process.env.jwtSecret
+          : config.get("jwtSecret");
+
+      jwt.sign(payload, jwt_secret, { expiresIn: 360000 }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send("Server Error");
